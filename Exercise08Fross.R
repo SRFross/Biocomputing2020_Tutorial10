@@ -34,3 +34,31 @@ for(i in 1:length(cumulativeSumMSU)){
 plot(cumulativeSumMSU, type = "l", col = "blue", xlab = "Number of baskets", ylab = "cummulative score")
 lines(cumulativeSumUW, type = "l", col = "red")
 
+
+
+##2. Make the "Guess my number" game
+#Generate a random number and save
+computerNumber <- sample(1:100, 1, replace = FALSE)
+
+#Make a loop which takes the input from the user and as long as the guess count is below 11 times goes through an if/else 
+count = 0
+
+while(count < 11){ 
+  userGuess <- readline(prompt="Please guess a number between 1 and 100: ")
+  userGuess <- as.integer(userGuess)
+  
+  if(userGuess == computerNumber){ 
+    print("Correct!")
+    count <- count + 11
+  }else if(userGuess > computerNumber){
+    print("Guess Lower!")
+    count <- count + 1   
+  }else{
+    print("Guess Higher")
+    count <- count + 1
+  }
+}
+
+
+
+
