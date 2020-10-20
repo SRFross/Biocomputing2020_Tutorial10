@@ -31,5 +31,6 @@ for(i in 1:length(cumulativeSumMSU)){
 }
 
 #Plot the data
-
+plot(cumulativeSumMSU, type = "l", col = "blue", xlab = "Number of baskets", ylab = "cummulative score")
+lines(cumulativeSumUW, type = "l", col = "red")
 
