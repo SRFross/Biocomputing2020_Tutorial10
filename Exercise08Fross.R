@@ -9,25 +9,39 @@ setwd("/Users/Shaneann/Desktop/data-shell/Biocomputing2020_Tutorial10")
 game <- read.delim(file="UWvMSU_1-22-13.txt", header=TRUE, stringsAsFactors=FALSE) 
 
 #Create a cumulative scores matrix
-##First, count up how many times there was a score to preallocate a matrix
-scoreCountUW <- sum(game$team == "UW")
-scoreCountMSU <- sum(game$team == "MSU")
 
 #make the preallocate matrix
-cumulativeSumUW <- matrix(data = 0, nrow = 23)
-cumulativeSumMSU <- matrix(data = 0, nrow = 27)
+cumulativeSumUW <- matrix(data = 0, nrow = 50)
+cumulativeSumMSU <- matrix(data = 0, nrow = 50)
 
 #Struggled to make it count up and add cumulatively when all together. So draw out only one team from the table and cumSum from there
 UWonly <- game[game[,2] == "UW",]
 MSUonly <- game[game[,2] == "MSU",]
 
+
+##Added the zeros so that each time has 50 entries
+#Want to copy the game data frame and change all the MSU's to 0s then go in and copy again and make all the UM's equal to 0
+
+zero <- 0
+MSUtotal <- game
+for (i in 1:50){
+  if (MSUtotal$team[i] == "UW")
+    MSUtotal$score[i] <- zero
+}
+
+UWtotal <- game
+for (i in 1:50){
+  if (UWtotal$team[i] == "MSU")
+    UWtotal$score[i] <- zero
+}
+
 #Do a cumulative sum
 for(i in 1:length(cumulativeSumUW)){
-  cumulativeSumUW[i] = sum(UWonly$score[1:i])  
+  cumulativeSumUW[i] = sum(UWtotal$score[1:i])  
 }
 
 for(i in 1:length(cumulativeSumMSU)){
-  cumulativeSumMSU[i] = sum(MSUonly$score[1:i])  
+  cumulativeSumMSU[i] = sum(MSUtotal$score[1:i])  
 }
 
 #Plot the data
@@ -58,6 +72,7 @@ while(count < 11){
     count <- count + 1
   }
 }
+
 
 
 
